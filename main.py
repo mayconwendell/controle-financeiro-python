@@ -18,10 +18,10 @@ def menu():
                 adicionar_movimentacao('despesa')
 
             elif opcao == 3:
-                pass
+                ver_movimentacoes()
 
             elif opcao == 4:
-                pass
+                ver_saldo()
             
             elif opcao == 5:
                 print('Programa encerrado!')

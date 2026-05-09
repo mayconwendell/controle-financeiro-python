@@ -24,7 +24,7 @@ def adicionar_movimentacao(tipo):
 
         continuar = input('Deseja adicionar outra movimentação? (s / n) ').lower().strip()
 
-def ver():
+def ver_movimentacoes():
 
     if not movimentacoes:
         print('Não tem movimentações cadastradas!')
