@@ -1,4 +1,7 @@
-def menu():
+from jso_utils import salvar, carregar
+from financeiro import adicionar_movimentacao, ver_movimentacoes, ver_saldo
+
+def menu(movimentacoes):
 
     while True:
         print('\n========== MENU ==========\n')
@@ -12,19 +15,20 @@ def menu():
             opcao = int(input('Qual opção deseja: '))
 
             if opcao == 1:
-                adicionar_movimentacao('receita')
+                adicionar_movimentacao('receita', movimentacoes)
             
             elif opcao == 2:
-                adicionar_movimentacao('despesa')
+                adicionar_movimentacao('despesa', movimentacoes)
 
             elif opcao == 3:
-                ver_movimentacoes()
+                ver_movimentacoes(movimentacoes)
 
             elif opcao == 4:
-                ver_saldo()
+                ver_saldo(movimentacoes)
             
             elif opcao == 5:
                 print('Programa encerrado!')
+                salvar(movimentacoes)
                 break
 
             else:
@@ -32,3 +36,6 @@ def menu():
 
         except ValueError:
             print('Você digitou um valor inválido!')
+
+movimentacoes = carregar()
+menu()
