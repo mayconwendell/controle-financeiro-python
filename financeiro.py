@@ -62,3 +62,21 @@ def ver():
 
         except ValueError:
             print('Você digitou um valor inválido!')
+
+def ver_saldo():
+
+    if not movimentacoes:
+        print('Não tem movimentações cadastradas!')
+    
+    else:
+        somar = 0
+
+        for movimentacao in movimentacoes:
+            
+            if movimentacao['tipo'] == 'receita':
+                somar += movimentacao['valor']
+            
+            elif movimentacao['tipo'] == 'despesa':
+                somar -= movimentacao['valor']
+            
+        print(f'Seu saldo final é R$: {somar}')
