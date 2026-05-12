@@ -195,6 +195,38 @@ def editar_movimentacoes(movimentacoes):
             
             continuar = input('Deseja editar outra movimentação? (s / n) ').lower()
 
+def remover_movimentacoes(movimentacoes):
+    if not movimentacoes:
+        print('Não tem movimentações cadastradas!')
+        return
+    else:
+        continuar = 's'
+        
+        while continuar == 's':
+                
+            listar_movimentacoes(movimentacoes)
+            try:
+
+                pergunta = int(input('Qual opção deseja remover: '))
+                indice = pergunta - 1
+                
+                if pergunta >= 1 and pergunta <= len(movimentacoes):
+                    confirmacao = input(f'Tem certeza de que deseja deletar a movimentação {pergunta}? (s / n) ').lower().strip()
+
+                    if confirmacao == 's':
+                        movimentacoes.pop(indice)
+                    
+                    else:
+                        break
+
+                else:
+                    print('Movimentação não localizada!')
+
+            except ValueError:
+                print('Valor digitado inválido!')
+
+            continuar = input('Quer remover outra movimentação: ').lower().strip()
+
 def ver_saldo(movimentacoes):
 
     if not movimentacoes:
@@ -212,7 +244,6 @@ def ver_saldo(movimentacoes):
             saldo -= movimentacao['valor']
 
     print(f'Seu saldo final é R$: {saldo:.2f}')
-
 
 def relatorio(movimentacoes):
 
@@ -239,7 +270,7 @@ def relatorio(movimentacoes):
     print(f'Total de despesas: R$ {total_des:.2f}')
     print(f'Saldo final: R$ {saldo:.2f}')
 
-def mostrar_relatorio(movimentacoes):
+def estatisticas_gerais(movimentacoes):
     qtd_receita = 0
     qtd_despesa = 0
     total_gasto = 0
@@ -260,7 +291,8 @@ def mostrar_relatorio(movimentacoes):
     print(f'O valor gasto foi: {total_gasto:.2f}')
     print(f'A quantidade de movimentações é: {len(movimentacoes)}')
 
-def estatisticas(movimentacoes):
+def menu_estatisticas(movimentacoes):
+    
     if not movimentacoes:
         print('Não tem movimentações cadastradas!')
     
@@ -289,7 +321,7 @@ def estatisticas(movimentacoes):
                                 maior_despesa = movimentacao
                     
                     if maior_despesa:
-                        print(f"{maior_despesa['nome']} R$ {maior_despesa['valor']:.2f}")
+                        print(f"Maior despesa: {maior_despesa['nome']} - R$ {maior_despesa['valor']:.2f}")
 
                 elif opcao == 2:
                     
@@ -344,7 +376,7 @@ def estatisticas(movimentacoes):
                         print("Não existem despesas cadastradas.")
 
                 elif opcao == 4:
-                    mostrar_relatorio(movimentacoes)
+                    estatisticas_gerais(movimentacoes)
 
                 elif opcao == 5:
                     totais = {}
@@ -373,5 +405,5 @@ def estatisticas(movimentacoes):
 
             except ValueError:
                 print('Você digitou um valor inválido!')
-                
+
             continuar = input('Deseja ver outra estatística? (s / n) ').lower().strip()
