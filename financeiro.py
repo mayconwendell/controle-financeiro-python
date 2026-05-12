@@ -177,9 +177,11 @@ def editar_movimentacoes(movimentacoes):
                             if novo_tipo == 1:
                                 novo_tipo = 'receita'
                                 movimentacoes[indice]['tipo'] = novo_tipo
+
                             elif novo_tipo == 2:
                                 novo_tipo = 'despesa'
                                 movimentacoes[indice]['tipo'] = novo_tipo
+                                
                             else:
                                 print('tipo inválido!')
                             
@@ -225,7 +227,7 @@ def remover_movimentacoes(movimentacoes):
             except ValueError:
                 print('Valor digitado inválido!')
 
-            continuar = input('Quer remover outra movimentação: ').lower().strip()
+            continuar = input('Quer remover outra movimentação (s / n) ').lower().strip()
 
 def ver_saldo(movimentacoes):
 
@@ -292,7 +294,7 @@ def estatisticas_gerais(movimentacoes):
     print(f'A quantidade de movimentações é: {len(movimentacoes)}')
 
 def menu_estatisticas(movimentacoes):
-    
+
     if not movimentacoes:
         print('Não tem movimentações cadastradas!')
     

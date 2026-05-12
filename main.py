@@ -2,12 +2,12 @@ from financeiro import (
     adicionar,
     ver_movimentacoes,
     editar_movimentacoes,
+    remover_movimentacoes,
     estatisticas_gerais,
     menu_estatisticas,
     ver_saldo,
     relatorio
 )
-
 from json_utils import salvar, carregar
 
 
@@ -16,15 +16,16 @@ def menu(movimentacoes):
         print('\n========== MENU ==========\n')
 
         print(
-            '1 - Adicionar Receita'
-            '\n2 - Adicionar Despesa'
+            '1 - Adicionar receita'
+            '\n2 - Adicionar despesa'
             '\n3 - Editar movimentações' \
-            '\n4 - Ver movimentações' \
-            '\n5 - Menu Estatísticas' \
-            '\n6 - Estatísticas gerais'
-            '\n7 - Ver Saldo' \
-            '\n8 - Relatório' \
-            '\n9 - Sair\n'
+            '\n4 - Remover movimentações' \
+            '\n5 - Ver movimentações' \
+            '\n6 - Menu estatísticas' \
+            '\n7 - Estatísticas gerais'
+            '\n8 - Ver saldo' \
+            '\n9 - Relatório' \
+            '\n10 - Sair\n'
         )
 
         try:
@@ -32,29 +33,36 @@ def menu(movimentacoes):
 
             if opcao == 1:
                 adicionar('receita', movimentacoes)
+                salvar(movimentacoes)
 
             elif opcao == 2:
                 adicionar('despesa', movimentacoes)
+                salvar(movimentacoes)
 
             elif opcao == 3:
                 editar_movimentacoes(movimentacoes)
+                salvar(movimentacoes)
 
             elif opcao == 4:
-                ver_movimentacoes(movimentacoes)
+                remover_movimentacoes(movimentacoes)
+                salvar(movimentacoes)
 
             elif opcao == 5:
-                menu_estatisticas(movimentacoes)
+                ver_movimentacoes(movimentacoes)
 
             elif opcao == 6:
-                estatisticas_gerais(movimentacoes)
+                menu_estatisticas(movimentacoes)
 
             elif opcao == 7:
-                ver_saldo(movimentacoes)
+                estatisticas_gerais(movimentacoes)
 
             elif opcao == 8:
-                relatorio(movimentacoes)
+                ver_saldo(movimentacoes)
 
             elif opcao == 9:
+                relatorio(movimentacoes)
+
+            elif opcao == 10:
                 print('Programa encerrado!')
                 salvar(movimentacoes)
                 break

@@ -22,5 +22,11 @@
         "valor": 50.0,
         "tipo": "despesa",
         "categoria": "musica"
+    },
+    {
+        "nome": "compras",
+        "valor": 800.0,
+        "tipo": "despesa",
+        "categoria": "lazer"
     }
 ]
