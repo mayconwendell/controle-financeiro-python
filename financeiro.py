@@ -238,3 +238,87 @@ def relatorio(movimentacoes):
     print(f'Total de receitas: R$ {total_rec:.2f}')
     print(f'Total de despesas: R$ {total_des:.2f}')
     print(f'Saldo final: R$ {saldo:.2f}')
+
+def estatisticas(movimentacoes):
+    if not movimentacoes:
+        print('Não tem movimentações cadastradas!')
+    
+    else:
+        continuar = 's'
+        while continuar == 's':
+            try:
+                print('1 - Maior despesa' \
+                '\n2 - Média de gastos' \
+                '\n3 - Categoria com mais despesas' \
+                '\n4 - Quantidade de movimentações' \
+                '\n5 - Total por categoria' \
+                '\n6 - Sair')
+
+                opcao = int(input('Qual opção deseja: '))
+
+                if opcao == 1:
+                    maior_despesa = None
+
+                    for movimentacao in movimentacoes:
+
+                        if movimentacao['tipo'] == 'despesa':
+                            if maior_despesa is None:
+                                maior_despesa = movimentacao
+                            elif movimentacao['valor'] > maior_despesa['valor']:
+                                maior_despesa = movimentacao
+                    
+                    if maior_despesa:
+                        print(f"{maior_despesa['nome']} R$ {maior_despesa['valor']:.2f}")
+
+                if opcao == 2:
+                    
+                    total_gastos = 0
+                    quantidade = 0
+                    
+                    for movimentacao in movimentacoes:
+
+                        if movimentacao['tipo'] == 'despesa':
+                            total_gastos += movimentacao['valor']
+                            quantidade += 1
+
+                    if quantidade > 0:
+
+                        media = total_gastos / quantidade
+                        print(f"A média de despesas é R$ {media:.2f}")
+                    
+                    else:
+                        print('Não existem despesas.')
+
+                if opcao == 3:
+                    gastos_categoria = {}
+                    maior_categoria = None
+                    maior_valor = 0
+
+                    for movimentacao in movimentacoes:
+
+                        if movimentacao['tipo'] == 'despesa':
+                                            
+                            categoria = movimentacao['categoria']
+                            valor = movimentacao['valor']
+
+                            if movimentacao['categoria'] in gastos_categoria:
+                                gastos_categoria[categoria] += valor
+
+                            else:
+                                gastos_categoria[categoria] = valor
+
+                    for chave, qtd in gastos_categoria.items():
+                        
+                        if maior_categoria is None:
+                            maior_categoria = chave
+                            maior_valor = qtd
+
+                        elif qtd > maior_valor:
+                            maior_valor = qtd
+                            maior_categoria = chave
+                            
+                    print(f"Categoria com mais despesas: {maior_categoria} - R$ {maior_valor:.2f}")
+
+            except ValueError:
+                print('Você digitou um valor inválido!')
+            continuar = input('Deseja ver outra estatística? (s / n) ').lower().strip()
