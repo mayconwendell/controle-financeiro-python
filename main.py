@@ -3,7 +3,7 @@ from financeiro import (
     ver_movimentacoes,
     editar_movimentacoes,
     remover_movimentacoes,
-    estatisticas_gerais,
+    dashboard,
     menu_estatisticas,
     ver_saldo,
     relatorio
@@ -22,7 +22,7 @@ def menu(movimentacoes):
             '\n4 - Remover movimentações' \
             '\n5 - Ver movimentações' \
             '\n6 - Menu estatísticas' \
-            '\n7 - Estatísticas gerais'
+            '\n7 - Dashboard'
             '\n8 - Ver saldo' \
             '\n9 - Relatório' \
             '\n10 - Sair\n'
@@ -54,7 +54,7 @@ def menu(movimentacoes):
                 menu_estatisticas(movimentacoes)
 
             elif opcao == 7:
-                estatisticas_gerais(movimentacoes)
+                dashboard(movimentacoes)
 
             elif opcao == 8:
                 ver_saldo(movimentacoes)

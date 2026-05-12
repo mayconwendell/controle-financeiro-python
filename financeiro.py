@@ -272,26 +272,76 @@ def relatorio(movimentacoes):
     print(f'Total de despesas: R$ {total_des:.2f}')
     print(f'Saldo final: R$ {saldo:.2f}')
 
-def estatisticas_gerais(movimentacoes):
-    qtd_receita = 0
-    qtd_despesa = 0
-    total_gasto = 0
-    total_recebido = 0
+def dashboard(movimentacoes):
+    valor_receita = 0
+    valor_despesa = 0
+    valor_final = 0
+    maior_valor = 0
+    gastos_categoria = {}
+    maior_categoria = None
+    maior_gasto = None
+    
+
+    print('========== DASHBOARD ==========')
 
     for movimentacao in movimentacoes:
-        if movimentacao['tipo'] == 'receita':
-            qtd_receita += 1
-            total_recebido += movimentacao['valor']
         
-        elif movimentacao['tipo'] == 'despesa':
-            qtd_despesa += 1
-            total_gasto += movimentacao['valor']
+        if movimentacao['tipo'] == 'receita':
+            valor_receita += movimentacao['valor']
 
-    print(f'A quantidade de entradas é: {qtd_receita}')
-    print(f'A quantidade de saídas é: {qtd_despesa}')
-    print(f'O valor recebido é: R$ {total_recebido:.2f}')
-    print(f'O valor gasto foi: {total_gasto:.2f}')
-    print(f'A quantidade de movimentações é: {len(movimentacoes)}')
+        elif movimentacao['tipo'] == 'despesa':
+            
+            valor_despesa += movimentacao['valor']
+            
+            if maior_gasto is None:
+                maior_gasto = movimentacao
+            
+            elif maior_gasto['valor'] < movimentacao['valor']:
+                maior_gasto = movimentacao
+
+            categoria = movimentacao['categoria']
+            valor = movimentacao['valor']
+
+            if categoria in gastos_categoria:
+                gastos_categoria[categoria] += valor
+            
+            else:
+                gastos_categoria[categoria] = valor
+
+    for chave, valor in gastos_categoria.items():
+        if maior_categoria is None:
+            maior_categoria = chave
+            maior_valor = valor
+        
+        elif maior_valor < valor:
+            maior_categoria = chave
+            maior_valor = valor
+
+    valor_final = valor_receita - valor_despesa
+    status = 'positivo' if valor_final > 0 else 'negativo'
+    if valor_final == 0:
+        status = 'nulo'
+
+    print(f'\nSaldo atual: R$ {valor_final}')
+    print(f'Total de receitas: R$ {valor_receita}')
+    print(f'Total de despesas: R$ {valor_despesa}\n')
+    
+    if maior_gasto is not None:
+        print(f"Maior gasto: {maior_gasto['nome']} - R$ {maior_gasto['valor']:.2f}")
+    
+    else:
+        print("Maior gasto: Nenhuma despesa cadastrada")
+
+    if maior_categoria is not None:
+        print(f'Categoria com maior gasto: {maior_categoria} - R$ {maior_valor:.2f}')
+
+    else:
+        print("Categoria com maior gasto: Nenhuma despesa cadastrada")
+
+    print(f'\nQuantidade de movimentações: {len(movimentacoes)}\n')
+
+    print(f'Status financeiro: {status}\n')
+    print('=' *31)
 
 def menu_estatisticas(movimentacoes):
 
@@ -378,7 +428,7 @@ def menu_estatisticas(movimentacoes):
                         print("Não existem despesas cadastradas.")
 
                 elif opcao == 4:
-                    estatisticas_gerais(movimentacoes)
+                    dashboard(movimentacoes)
 
                 elif opcao == 5:
                     totais = {}
