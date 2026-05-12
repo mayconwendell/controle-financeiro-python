@@ -52,4 +52,4 @@ def menu(movimentacoes):
 
 
 movimentacoes = carregar()
-menu()
+menu(movimentacoes)

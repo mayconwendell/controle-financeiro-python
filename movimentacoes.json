@@ -1,0 +1,26 @@
+[
+    {
+        "nome": "Mercado",
+        "valor": 100.0,
+        "tipo": "receita",
+        "categoria": "alimentação"
+    },
+    {
+        "nome": "Pagamento",
+        "valor": 1700.0,
+        "tipo": "receita",
+        "categoria": "salário"
+    },
+    {
+        "nome": "Livros",
+        "valor": 250.0,
+        "tipo": "despesa",
+        "categoria": "estudos"
+    },
+    {
+        "nome": "Fone",
+        "valor": 50.0,
+        "tipo": "despesa",
+        "categoria": "musica"
+    }
+]

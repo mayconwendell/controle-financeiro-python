@@ -7,41 +7,9 @@ def adicionar(tipo, movimentacoes):
         try:
             nome = input('Digite o nome: ')
 
-            print("\n========== Categorias ==========\n")
+            categoria = escolher_categoria()
 
-            print("1 - Alimentação"
-                  "\n2 - Transporte"
-                  "\n3 - Lazer"
-                  "\n4 - Salário"
-                  "\n5 - Estudos"
-                  "\n6 - Outro")
-
-            categoria = int(input('Qual categoria: '))
-            categoria_valida = True
-
-            if categoria == 1:
-                categoria = 'alimentação'
-
-            elif categoria == 2:
-                categoria = 'transporte'
-
-            elif categoria == 3:
-                categoria = 'lazer'
-
-            elif categoria == 4:
-                categoria = 'salário'
-
-            elif categoria == 5:
-                categoria = 'estudos'
-
-            elif categoria == 6:
-                categoria = input('Digite a categoria: ').lower()
-
-            else:
-                print('Categoria inválida!')
-                categoria_valida = False
-
-            if categoria_valida:
+            if categoria:
 
                 valor = float(input('Digite o valor: '))
 
@@ -61,6 +29,41 @@ def adicionar(tipo, movimentacoes):
 
         continuar = input('Deseja adicionar outra movimentação? (s / n) ').lower().strip()
 
+def escolher_categoria():
+    print("\n========== Categorias ==========\n")
+
+    print("1 - Alimentação"
+        "\n2 - Transporte"
+        "\n3 - Lazer"
+        "\n4 - Salário"
+        "\n5 - Estudos"
+        "\n6 - Outro")
+
+    categoria = int(input('Qual categoria: '))
+
+    if categoria == 1:
+        categoria = 'alimentação'
+
+    elif categoria == 2:
+        categoria = 'transporte'
+
+    elif categoria == 3:
+        categoria = 'lazer'
+
+    elif categoria == 4:
+        categoria = 'salário'
+
+    elif categoria == 5:
+        categoria = 'estudos'
+
+    elif categoria == 6:
+        categoria = input('Digite a categoria: ').lower()
+
+    else:
+        print('Categoria inválida!')
+        return None
+    
+    return categoria
 
 def ver_movimentacoes(movimentacoes):
 
@@ -123,6 +126,74 @@ def ver_movimentacoes(movimentacoes):
 
     except ValueError:
         print('Você digitou um valor inválido!')
+
+def listar_movimentacoes(movimentacoes):
+    if not movimentacoes:
+        print('Não tem movimentações cadastradas!')
+    
+    else:
+        print("========== LISTA DE MOVIMENTAÇÕES ==========")
+        for i, movimentacao in enumerate(movimentacoes):
+            print(f"{i + 1} - {movimentacao['nome']} - R$ {movimentacao['valor']:.2f} - {movimentacao['tipo']} - {movimentacao['categoria']}")
+
+def editar_movimentacoes(movimentacoes):
+    if not movimentacoes:
+        print('Não tem movimentações cadastradas!')
+    
+    else:
+        continuar = 's'
+        while continuar == 's':
+                
+            try:
+                listar_movimentacoes(movimentacoes)
+                pergunta = int(input('Qual movimentação deseja editar: '))
+
+                if pergunta > 0 and pergunta <= len(movimentacoes):
+                    print('1 - Nome' \
+                    '\n2 - Valor' \
+                    '\n3 - Tipo' \
+                    '\n4 - Categoria\n')
+
+                    opcao = int(input('Qual opção deseja: '))
+                    indice = pergunta - 1
+
+                    if opcao <1 or opcao > 4:
+                        print('Opção inválida!')
+
+                    else:
+                        if opcao == 1:
+                            novo_nome = input('Digite o novo nome: ').lower()
+                            movimentacoes[indice]['nome'] = novo_nome
+                        
+                        elif opcao == 2:
+                            novo_valor = float(input('Digite o novo valor: '))
+                            movimentacoes[indice]['valor'] = novo_valor
+                        
+                        elif opcao == 3:
+                            print('1 - Receita' \
+                            '\n2 - Despesa\n')
+                            novo_tipo = int(input('Qual o novo tipo: '))
+                            
+                            if novo_tipo == 1:
+                                novo_tipo = 'receita'
+                                movimentacoes[indice]['tipo'] = novo_tipo
+                            elif novo_tipo == 2:
+                                novo_tipo = 'despesa'
+                                movimentacoes[indice]['tipo'] = novo_tipo
+                            else:
+                                print('tipo inválido!')
+                            
+                        
+                        elif opcao == 4:
+                            nova_categoria = escolher_categoria()
+                            if nova_categoria:
+                                movimentacoes[indice]['categoria'] = nova_categoria                          
+                else:
+                    print('Movimentação não encontrada!')
+            except ValueError:
+                print('Valor digitado inválido!')
+            
+            continuar = input('Deseja editar outra movimentação? (s / n) ').lower()
 
 def ver_saldo(movimentacoes):
 
