@@ -28,5 +28,17 @@
         "valor": 800.0,
         "tipo": "despesa",
         "categoria": "lazer"
+    },
+    {
+        "nome": "Computador",
+        "valor": 350.0,
+        "tipo": "receita",
+        "categoria": "venda"
+    },
+    {
+        "nome": "mercado",
+        "valor": 1200.0,
+        "tipo": "despesa",
+        "categoria": "alimentação"
     }
 ]

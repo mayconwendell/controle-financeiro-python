@@ -3,6 +3,7 @@ from financeiro import (
     ver_movimentacoes,
     editar_movimentacoes,
     remover_movimentacoes,
+    filtro_categoria,
     dashboard,
     menu_estatisticas,
     ver_saldo,
@@ -18,14 +19,15 @@ def menu(movimentacoes):
         print(
             '1 - Adicionar receita'
             '\n2 - Adicionar despesa'
-            '\n3 - Editar movimentações' \
+            '\n3 - Editar movimentações' 
             '\n4 - Remover movimentações' \
-            '\n5 - Ver movimentações' \
-            '\n6 - Menu estatísticas' \
-            '\n7 - Dashboard'
-            '\n8 - Ver saldo' \
-            '\n9 - Relatório' \
-            '\n10 - Sair\n'
+            '\n5 - Filtrar por categoria' 
+            '\n6 - Ver movimentações' 
+            '\n7 - Menu estatísticas' 
+            '\n8 - Dashboard'
+            '\n9 - Ver saldo' 
+            '\n10 - Relatório' \
+            '\n11 - Sair' 
         )
 
         try:
@@ -48,21 +50,24 @@ def menu(movimentacoes):
                 salvar(movimentacoes)
 
             elif opcao == 5:
-                ver_movimentacoes(movimentacoes)
+                filtro_categoria(movimentacoes)
 
             elif opcao == 6:
-                menu_estatisticas(movimentacoes)
+                ver_movimentacoes(movimentacoes)
 
             elif opcao == 7:
-                dashboard(movimentacoes)
+                menu_estatisticas(movimentacoes)
 
             elif opcao == 8:
-                ver_saldo(movimentacoes)
+                dashboard(movimentacoes)
 
             elif opcao == 9:
-                relatorio(movimentacoes)
+                ver_saldo(movimentacoes)
 
             elif opcao == 10:
+                relatorio(movimentacoes)
+
+            elif opcao == 11:
                 print('Programa encerrado!')
                 salvar(movimentacoes)
                 break

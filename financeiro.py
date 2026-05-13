@@ -32,38 +32,36 @@ def adicionar(tipo, movimentacoes):
 def escolher_categoria():
     print("\n========== Categorias ==========\n")
 
-    print("1 - Alimentação"
-        "\n2 - Transporte"
-        "\n3 - Lazer"
-        "\n4 - Salário"
-        "\n5 - Estudos"
-        "\n6 - Outro")
+    categorias = {
+        1: 'alimentação',
+        2: 'transporte',
+        3: 'lazer',
+        4: 'salário',
+        5: 'estudos'
+    }
 
-    categoria = int(input('Qual categoria: '))
+    for chave, valor in categorias.items():
+        print(f'{chave} - {valor}')
 
-    if categoria == 1:
-        categoria = 'alimentação'
+    print('6 - Outro')
 
-    elif categoria == 2:
-        categoria = 'transporte'
+    try:
 
-    elif categoria == 3:
-        categoria = 'lazer'
+        categoria = int(input('Qual categoria: '))
 
-    elif categoria == 4:
-        categoria = 'salário'
+        if categoria in categorias:
+            return categorias[categoria]
+        
+        elif categoria == 6:
+            categoria = input('Digite a categoria: ').lower()
+            return categoria
 
-    elif categoria == 5:
-        categoria = 'estudos'
+        else:
+            print('Categoria inválida!')
+            return None
 
-    elif categoria == 6:
-        categoria = input('Digite a categoria: ').lower()
-
-    else:
-        print('Categoria inválida!')
-        return None
-    
-    return categoria
+    except ValueError:
+        print('Você digitou um valor inválido!')    
 
 def ver_movimentacoes(movimentacoes):
 
@@ -459,3 +457,29 @@ def menu_estatisticas(movimentacoes):
                 print('Você digitou um valor inválido!')
 
             continuar = input('Deseja ver outra estatística? (s / n) ').lower().strip()
+
+def filtro_categoria(movimentacoes):
+    if not movimentacoes:
+        print('Não tem movimentações cadastradas!')
+    
+    else:
+        continuar = 's'
+        
+        while continuar == 's':
+            categoria_escolhida = escolher_categoria()
+            total_categoria = 0
+            encontrou = False
+
+            print(f'Categoria: {categoria_escolhida}\n')
+
+            for i, movimentacao in enumerate(movimentacoes):
+                
+                if movimentacao['categoria'] == categoria_escolhida:
+                    total_categoria += movimentacao['valor']
+                    encontrou = True
+                    print(f"{i + 1} - {movimentacao['nome']} | {movimentacao['tipo']} | {movimentacao['valor']:.2f}")
+
+            if encontrou == False:
+                print('Categoria não localizada!')
+            
+            continuar = input('Deseja filtrar outra categoria? (s / n): ').lower().strip()
