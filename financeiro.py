@@ -256,7 +256,7 @@ def relatorio(movimentacoes):
 
     print('\n========== RELATÓRIO ==========\n')
 
-    for movimentacao in movimentacoes:
+    for i, movimentacao in enumerate(movimentacoes):
 
         if movimentacao['tipo'] == 'receita':
             total_rec += movimentacao['valor']
@@ -264,6 +264,13 @@ def relatorio(movimentacoes):
         elif movimentacao['tipo'] == 'despesa':
             total_des += movimentacao['valor']
 
+        print(f"\n{i + 1} - {movimentacao['nome']}")
+        print(f"tipo: {movimentacao['tipo']}")
+        print(f"Categoria: {movimentacao['categoria']}")
+        print(f"Valor: R$ {movimentacao['valor']:.2f}\n")
+
+        print("-" *31)
+    
     saldo = total_rec - total_des
 
     print(f'Total de receitas: R$ {total_rec:.2f}')
