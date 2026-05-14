@@ -6,10 +6,10 @@ from financeiro import (
     filtro_categoria,
     dashboard,
     menu_estatisticas,
-    ver_saldo,
-    salvar_relatorio,
-    relatorio
+    ver_saldo
 )
+
+from financeiro_utils import salvar_relatorio, relatorio, exportar_csv
 from json_utils import salvar, carregar
 
 
@@ -71,10 +71,14 @@ def menu(movimentacoes):
 
                 print(texto_relatorio)
 
-                salvar = input('\nDeseja salvar o relatório em txt? (s/n): ').lower().strip()
-
-                if salvar == 's':
+                txt = input('\nDeseja salvar o relatório em txt? (s/n): ').lower().strip()
+                csv = input('\nDeseja salvar o relatório em .csv? (s/n): ').lower().strip()
+                
+                if txt == 's':
                     salvar_relatorio(texto_relatorio)
+
+                if csv == 's':
+                    exportar_csv(movimentacoes) 
 
             elif opcao == 11:
                 print('Programa encerrado!')

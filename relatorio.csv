@@ -1,0 +1,8 @@
+nome,valor,tipo,categoria
+Mercado,100.0,receita,alimentação
+Pagamento,1700.0,receita,salário
+Livros,250.0,despesa,estudos
+Fone,50.0,despesa,musica
+compras,800.0,despesa,lazer
+Computador,350.0,receita,venda
+mercado,1200.0,despesa,alimentação
