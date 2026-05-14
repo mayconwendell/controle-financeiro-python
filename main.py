@@ -7,6 +7,7 @@ from financeiro import (
     dashboard,
     menu_estatisticas,
     ver_saldo,
+    salvar_relatorio,
     relatorio
 )
 from json_utils import salvar, carregar
@@ -65,7 +66,15 @@ def menu(movimentacoes):
                 ver_saldo(movimentacoes)
 
             elif opcao == 10:
-                relatorio(movimentacoes)
+
+                texto_relatorio = relatorio(movimentacoes)
+
+                print(texto_relatorio)
+
+                salvar = input('\nDeseja salvar o relatório em txt? (s/n): ').lower().strip()
+
+                if salvar == 's':
+                    salvar_relatorio(texto_relatorio)
 
             elif opcao == 11:
                 print('Programa encerrado!')

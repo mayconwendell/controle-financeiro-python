@@ -1,0 +1,47 @@
+========== RELATÓRIO ==========
+
+
+1 - Mercado
+tipo: receita
+Categoria: alimentação
+Valor: R$ 100.00
+-------------------------------
+
+2 - Pagamento
+tipo: receita
+Categoria: salário
+Valor: R$ 1700.00
+-------------------------------
+
+3 - Livros
+tipo: despesa
+Categoria: estudos
+Valor: R$ 250.00
+-------------------------------
+
+4 - Fone
+tipo: despesa
+Categoria: musica
+Valor: R$ 50.00
+-------------------------------
+
+5 - compras
+tipo: despesa
+Categoria: lazer
+Valor: R$ 800.00
+-------------------------------
+
+6 - Computador
+tipo: receita
+Categoria: venda
+Valor: R$ 350.00
+-------------------------------
+
+7 - mercado
+tipo: despesa
+Categoria: alimentação
+Valor: R$ 1200.00
+-------------------------------
+Total de receitas: R$ 2150.00
+Total de despesas: R$ 2300.00
+Saldo final: R$ -150.00

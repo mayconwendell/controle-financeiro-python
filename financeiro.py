@@ -253,8 +253,9 @@ def relatorio(movimentacoes):
 
     total_rec = 0
     total_des = 0
+    texto = ''
 
-    print('\n========== RELATÓRIO ==========\n')
+    texto += '========== RELATÓRIO ==========\n\n'
 
     for i, movimentacao in enumerate(movimentacoes):
 
@@ -264,18 +265,20 @@ def relatorio(movimentacoes):
         elif movimentacao['tipo'] == 'despesa':
             total_des += movimentacao['valor']
 
-        print(f"\n{i + 1} - {movimentacao['nome']}")
-        print(f"tipo: {movimentacao['tipo']}")
-        print(f"Categoria: {movimentacao['categoria']}")
-        print(f"Valor: R$ {movimentacao['valor']:.2f}\n")
+        texto+= f"\n{i + 1} - {movimentacao['nome']}\n"
+        texto+= f"tipo: {movimentacao['tipo']}\n"
+        texto+= f"Categoria: {movimentacao['categoria']}\n"
+        texto+= f"Valor: R$ {movimentacao['valor']:.2f}\n"
 
-        print("-" *31)
+        texto +="-" *31 + '\n'
     
     saldo = total_rec - total_des
 
-    print(f'Total de receitas: R$ {total_rec:.2f}')
-    print(f'Total de despesas: R$ {total_des:.2f}')
-    print(f'Saldo final: R$ {saldo:.2f}')
+    texto+= f'Total de receitas: R$ {total_rec:.2f}\n'
+    texto+= f'Total de despesas: R$ {total_des:.2f}\n'
+    texto+= f'Saldo final: R$ {saldo:.2f}'
+
+    return texto
 
 def dashboard(movimentacoes):
     valor_receita = 0
@@ -466,6 +469,7 @@ def menu_estatisticas(movimentacoes):
             continuar = input('Deseja ver outra estatística? (s / n) ').lower().strip()
 
 def filtro_categoria(movimentacoes):
+
     if not movimentacoes:
         print('Não tem movimentações cadastradas!')
     
@@ -490,3 +494,10 @@ def filtro_categoria(movimentacoes):
                 print('Categoria não localizada!')
             
             continuar = input('Deseja filtrar outra categoria? (s / n): ').lower().strip()
+
+def salvar_relatorio(texto):
+    
+    with open('relatorio.txt', 'w', encoding='utf-8') as arquivo:
+        arquivo.write(texto)
+
+    print('Relatório salvou com sucesso!')
